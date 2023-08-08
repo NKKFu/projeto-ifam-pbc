@@ -1,7 +1,11 @@
 package model;
 
+import javalidator.utils.JaValidator;
 import utils.ValidacaoCPF;
 import utils.ValidacaoEmail;
+import utils.ValidacaoEndereco;
+import utils.ValidacaoNome;
+import utils.ValidacaoTelefone;
 
 public class Pessoa {
 
@@ -27,9 +31,7 @@ public class Pessoa {
     }
 
     public void setNome(String nome) {
-        if (!validarNome(nome)) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
+        JaValidator.validate(new ValidacaoNome(), telefone);
         this.nome = nome;
     }
 
@@ -38,9 +40,7 @@ public class Pessoa {
     }
 
     public void setEndereco(String endereco) {
-        if (!validarEndereco(endereco)) {
-            throw new IllegalArgumentException("Endereço inválido");
-        }
+        JaValidator.validate(new ValidacaoEndereco(), telefone);
         this.endereco = endereco;
     }
 
@@ -49,9 +49,7 @@ public class Pessoa {
     }
 
     public void setTelefone(String telefone) {
-        if (!validarTelefone(telefone)) {
-            throw new IllegalArgumentException("Telefone inválido");
-        }
+        JaValidator.validate(new ValidacaoTelefone(), telefone);
         this.telefone = telefone;
     }
 
@@ -60,9 +58,7 @@ public class Pessoa {
     }
 
     public void setEmail(String email) {
-        if (!ValidacaoEmail.validar(email)) {
-            throw new IllegalArgumentException("E-mail inválido");
-        }
+        JaValidator.validate(new ValidacaoEmail(), email);
         this.email = email;
     }
 
@@ -71,26 +67,7 @@ public class Pessoa {
     }
 
     public void setCpf(String cpf) {
-        if (!ValidacaoCPF.validar(cpf)) {
-            throw new IllegalArgumentException("CPF inválido");
-        }
+        JaValidator.validate(new ValidacaoCPF(), cpf);
         this.cpf = cpf;
-    }
-
-    // Validates if name contains only letters
-    public boolean validarNome(String nome) {
-        return nome.matches("[a-zA-Z\\s]+");
-    }
-
-    // Validates if phone number contains only numbers
-    // Can contain + symbol
-    // Can contain spaces
-    public boolean validarTelefone(String telefone) {
-        return telefone.matches("(\\+)?[0-9\\s]+");
-    }
-
-    // Validates if address is valid
-    public boolean validarEndereco(String endereco) {
-        return endereco.matches("[a-zA-Z0-9\\s]+");
     }
 }
