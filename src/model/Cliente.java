@@ -14,7 +14,8 @@ public class Cliente extends Pessoa{
         super(nome, endereco, telefone, email, cpf);
     }
 
-    public void addDependente(Dependente dependente){
+    public void addDependente(Dependente dependente, RelacaoEnum relacao){
+        dependente.setRelacao(relacao);
         dependentes.add(dependente);
     }
 

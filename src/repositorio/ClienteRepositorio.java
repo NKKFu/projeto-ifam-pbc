@@ -16,5 +16,4 @@ public class ClienteRepositorio {
     public static List<Cliente> listar(){
         return clientes;
     }
-
 }
